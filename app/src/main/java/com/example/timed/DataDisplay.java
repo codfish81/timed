@@ -1,6 +1,8 @@
 package com.example.timed;
 
-public class DataDisplay {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class DataDisplay extends AppCompatActivity {
     public static void loadData(String[] args) {
     }
 

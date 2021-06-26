@@ -1,6 +1,8 @@
 package com.example.timed;
 
-public class LimitInput {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class LimitInput extends AppCompatActivity {
     public static void loadPackages(String[] args) {
     }
 

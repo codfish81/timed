@@ -1,4 +1,6 @@
 package com.example.timed;
 
-public class PerAppView {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class PerAppView extends AppCompatActivity {
 }

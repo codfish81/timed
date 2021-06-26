@@ -1,4 +1,6 @@
 package com.example.timed;
 
-public class WeekView {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class WeekView extends AppCompatActivity {
 }
