@@ -13,7 +13,6 @@
         <activity android:name=".Dashboard">
             android:name=".Dashboard"
             android:label="Dashboard"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +23,6 @@
         <activity android:name=".AppDataManager">
             android:name=".AppDataManager"
             android:label="AppDataManager"
-            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
