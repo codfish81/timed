@@ -16,11 +16,9 @@ public class WeekView extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
 
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
