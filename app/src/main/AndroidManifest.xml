@@ -8,11 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Timed">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <activity android:name=".Dashboard">
-            android:name=".Dashboard"
-            android:label="Dashboard"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,8 +19,6 @@
         </activity>
 
         <activity android:name=".AppDataManager">
-            android:name=".AppDataManager"
-            android:label="AppDataManager"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,9 +27,6 @@
         </activity>
 
         <activity android:name=".DataDisplay">
-            android:name=".DataDisplay"
-            android:label="DataDisplay"
-            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,9 +35,6 @@
         </activity>
 
         <activity android:name=".LimitInput">
-            android:name=".LimitInput"
-            android:label="LimitInput"
-            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,9 +43,6 @@
         </activity>
 
         <activity android:name=".PerAppView">
-            android:name=".PerAppView"
-            android:label="App"
-            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,10 +50,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".WeekView">
-            android:name=".WeekView"
-            android:label="Week"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".WeekView"
+            android:parentActivityName="com.example.timed.Dashboard" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.timed.Dashboard" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
