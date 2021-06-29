@@ -7,6 +7,105 @@
     android:layout_height="match_parent"
     android:theme="@style/AppTheme.AppBarOverlay">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Dashboard"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="56dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <TextView
+                android:id="@+id/totalTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="132dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/totalTimeChart"
+                android:layout_width="400sp"
+                android:layout_height="80sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.454"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalTime"></com.github.mikephil.charting.charts.LineChart>
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="400dp"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalTimeChart" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvToday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <RadioGroup
+                android:id="@+id/toggle"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/toggle_outline"
+                android:checkedButton="@+id/radioToday"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/radioWeek"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Week" />
+                <RadioButton
+                    android:id="@+id/radioToday"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/toggle_background"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="Today" />
+            </RadioGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
@@ -16,151 +115,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/totalTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:text="@tools:sample/lorem" />
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/totalTimeChart"
-        android:layout_width="400sp"
-        android:layout_height="80sp"
-        android:layout_marginTop="156dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
-
-    <View
-        android:id="@+id/separator"
-        android:layout_width="400dp"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalTimeChart" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/dataPerApp"
-        android:layout_width="400sp"
-        android:layout_height="80sp"
-        android:layout_marginTop="8dp"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separator">
-
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="12dp"
-            android:contentDescription="App Icon"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/appName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginLeft="13dp"
-            android:layout_marginTop="12dp"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="17sp"
-            app:layout_constraintStart_toEndOf="@+id/icon"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/appTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:text=""
-            android:textColor="@color/grey"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/appName"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem" />
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/appTimeChart"
-            android:layout_width="250sp"
-            android:layout_height="20sp"
-            android:layout_marginStart="9dp"
-            android:layout_marginLeft="9dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/icon"
-            app:layout_constraintTop_toBottomOf="@+id/appName" />
-
-        <View
-            android:id="@+id/verticalSeparator"
-            android:layout_width="0.5dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="7dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/appTimeChart"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iconTimer"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="12dp"
-            android:contentDescription="Timer Icon"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_constraintStart_toEndOf="@+id/appTimeChart"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/timer"
-            android:layout_width="35dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="52dp"
-            android:text=""
-            android:textColor="@color/grey"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/appTimeChart"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="400dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separator"
-        app:layout_constraintVertical_bias="0.0">
-
-    </ androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

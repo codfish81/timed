@@ -1,6 +1,8 @@
 package com.example.timed;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,15 +15,29 @@ public class PerAppView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
 
+        // set a toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
+        // set a back button in the toolbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
 
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowCustomEnabled(true);
+        // date
+        TextView totalTime = (TextView) findViewById(R.id.date);
+        totalTime.setText("Tue, Jun 8");
+
+        // app name
+        TextView appName = (TextView) findViewById(R.id.appName);
+        appName.setText("Spotify");
+
+        // app usage
+        TextView appTime = (TextView) findViewById(R.id.appTime);
+        appTime.setText("1 hr, 21 min / 2 hr");
+
+        // app timer
+        TextView timer = (TextView) findViewById(R.id.timer);
+        timer.setText("2h");
     }
 
     @Override
