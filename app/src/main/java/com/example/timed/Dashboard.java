@@ -71,6 +71,17 @@ public class Dashboard extends AppCompatActivity {
         appTime.add("10 min");
         appTime.add("8 min");
 
+        ArrayList<String> timeLimit = new ArrayList<>();
+        appTime.add("2 hr");
+        appTime.add("2 hr");
+        appTime.add("1 hr");
+        appTime.add("30 min");
+        appTime.add("30 min");
+        appTime.add("30 min");
+        appTime.add("30 min");
+        appTime.add("30 min");
+
+
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvToday);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

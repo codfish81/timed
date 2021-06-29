@@ -43,6 +43,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String appName = mData.get(position);
         //holder.iconApp.setImageResource();
         holder.name.setText(appName);
+
+        String appTime = timeData.get(position);
+        holder.appTime.setText(appTime);
     }
 
     // total number of rows
@@ -60,18 +63,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         LineChart appTimeChart;
         View verSeparator;
         ImageView iconTimer;
-        TextView timer;
+        TextView appTimer;
 
         ViewHolder(View itemView) {
             super(itemView);
             iconApp = itemView.findViewById(R.id.icon);
             name = itemView.findViewById(R.id.appName);
             appTime = itemView.findViewById(R.id.appTime);
-            name = itemView.findViewById(R.id.appName);
             appTimeChart = itemView.findViewById(R.id.appTimeChart);
             verSeparator = itemView.findViewById(R.id.verSeparator);
             iconTimer = itemView.findViewById(R.id.iconTimer);
-            timer = itemView.findViewById(R.id.timer);
+            appTimer = itemView.findViewById(R.id.timer);
 
             itemView.setOnClickListener(this);
 
