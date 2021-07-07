@@ -107,6 +107,7 @@ public class AppDataManager extends Activity implements OnItemSelectedListener {
             long endMs = System.currentTimeMillis();
             queryDays = (endMs - beginMs) / 1000. / 60. / 60. / 24.;
             totalUsageMs = 0;
+            totalUsageMs = 0;
 
             if(queryDays == 0) queryDays = 1;
 
@@ -146,12 +147,12 @@ public class AppDataManager extends Activity implements OnItemSelectedListener {
             // Sort list
             mAppLabelComparator = new AppNameComparator(mAppLabelMap);
             sortList();
-/*
+
             ((TextView) findViewById(R.id.total_usage)).setText(
                     DateUtils.formatElapsedTime(totalUsageMs / 1000));
             ((TextView) findViewById(R.id.total_average)).setText(
                     DateUtils.formatElapsedTime((long)(totalUsageMs / 1000 / queryDays)));
-*/
+
 
             //((long)(totalUsageMs / 1000 / queryDays)));
         }
@@ -176,30 +177,11 @@ public class AppDataManager extends Activity implements OnItemSelectedListener {
             // A ViewHolder keeps references to children views to avoid unnecessary calls
             // to findViewById() on each row.
             AppViewHolder holder;
+           // by ListView is null.
 
-            // When convertView is not null, we can reuse it directly, there is no need
-            // to reinflate it. We only inflate a new View when the convertView supplied
-            // by ListView is null.
-/*
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.usage_stats_item, null);
-
-                // Creates a ViewHolder and store references to the two children views
-                // we want to bind data to.
-                holder = new AppViewHolder();
-                holder.pkgName = (TextView) convertView.findViewById(R.id.package_name);
-                holder.lastTimeUsed = (TextView) convertView.findViewById(R.id.last_time_used);
-                holder.usageTime = (TextView) convertView.findViewById(R.id.usage_time);
-                holder.average = (TextView) convertView.findViewById(R.id.usage_average);
-                convertView.setTag(holder);
-            } else {
-                // Get the ViewHolder back to get fast access to the TextView
-                // and the ImageView.
-                holder = (AppViewHolder) convertView.getTag();
-            }
-*/
             // Bind the data efficiently with the holder
             UsageStats pkgStats = mPackageStats.get(position);
+            holder = new AppViewHolder();
             if (pkgStats != null) {
                 String label = mAppLabelMap.get(pkgStats.getPackageName());
                 holder.pkgName.setText(label);
@@ -250,15 +232,6 @@ public class AppDataManager extends Activity implements OnItemSelectedListener {
         requestPermissions();
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mPm = getPackageManager();
-
-       // Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
-        // typeSpinner.setOnItemSelectedListener(this);
-
-       // ListView listView = (ListView) findViewById(R.id.pkg_list);
-        // mAdapter = new UsageStatsAdapter();
-        // listView.setAdapter(mAdapter);
-
-
 
     }
 
