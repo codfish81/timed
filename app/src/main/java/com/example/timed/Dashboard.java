@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -46,8 +47,8 @@ public class Dashboard extends AppCompatActivity {
 
 
         // total time
-        TextView totalTime = (TextView) findViewById(R.id.totalTime);
-        totalTime.setText("2 hr, 12 min");
+//        TextView totalTime = (TextView) findViewById(R.id.totalTime);
+//        totalTime.setText("2 hr, 12 min");
 
 
         // data to populate the RecyclerView with
@@ -95,7 +96,6 @@ public class Dashboard extends AppCompatActivity {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplication(), PerAppView.class);
         startActivity(intent);
-        finish();
     }
 
 

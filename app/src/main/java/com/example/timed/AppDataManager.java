@@ -150,9 +150,9 @@ public class AppDataManager extends Activity implements OnItemSelectedListener {
 
             ((TextView) findViewById(R.id.total_usage)).setText(
                     DateUtils.formatElapsedTime(totalUsageMs / 1000));
-            ((TextView) findViewById(R.id.total_average)).setText(
+            /*((TextView) findViewById(R.id.total_average)).setText(
                     DateUtils.formatElapsedTime((long)(totalUsageMs / 1000 / queryDays)));
-
+            */
 
             //((long)(totalUsageMs / 1000 / queryDays)));
         }

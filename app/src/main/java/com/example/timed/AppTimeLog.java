@@ -1,6 +1,13 @@
+/*
 package com.example.timed;
 
-import androidx.appcombat.app.AppCompatActivity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.os.CountDownTimer;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 public class AppTimeLog {
 
     private static final String TIME_KEY = "time";
@@ -8,7 +15,7 @@ public class AppTimeLog {
     private SharedPreferences preferences;
     private static final String DISPLAY_1_MIN = "display_1_min";
 
-    private int appTimed.;
+    private int appTimed;
     private boolean hasUsageAccess;
     private String mAppName;
     private Bitmap mAppIcon;
@@ -76,3 +83,4 @@ public class AppTimeLog {
     private void setupAndStartCDT() {
         cdt = new CountDownTimer(appTimed, 1000) {}
     }
+*/
