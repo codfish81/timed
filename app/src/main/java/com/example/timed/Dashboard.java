@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -51,7 +50,7 @@ public class Dashboard extends AppCompatActivity {
 //        totalTime.setText("2 hr, 12 min");
 
 
-        // data to populate the RecyclerView with
+        /*// data to populate the RecyclerView with
         ArrayList<String> appName = new ArrayList<>();
         appName.add("Spotify");
         appName.add("Chrome");
@@ -80,7 +79,19 @@ public class Dashboard extends AppCompatActivity {
         appTime.add("30 min");
         appTime.add("30 min");
         appTime.add("30 min");
-        appTime.add("30 min");
+        appTime.add("30 min");*/
+
+        AppDataManager usageMgr = new AppDataManager(this);
+        List<AppDataManager.AppUsage> usageList = usageMgr.getUsage(AppDataManager.DAY_MS);
+
+        ArrayList<String> appName = new ArrayList<>();
+        ArrayList<String> appTime = new ArrayList<>();
+
+        for(AppDataManager.AppUsage usage : usageList)
+        {
+            appName.add(usage.name);
+            appTime.add(DateUtils.formatElapsedTime(usage.usageMs / 1000));
+        }
 
 
         // set up the RecyclerView
