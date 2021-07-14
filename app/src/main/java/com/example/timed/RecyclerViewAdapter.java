@@ -39,25 +39,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_row, parent, false);
         // return new ViewHolder(view);
-
         final ViewHolder holder = new ViewHolder(view);
 
-        // クリックリスナを搭載
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int position = holder.getAdapterPosition(); // positionを取得
-                // 何かの処理をします
-//                Toast.makeText(this, "You clicked " + mData.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+                final int position = holder.getAdapterPosition();
                 Intent intent = new Intent(view.getContext(), PerAppView.class);
                 intent.putExtra("APP_NAME", mData.get(position));
                 intent.putExtra("APP_TIME", timeData.get(position));
                 view.getContext().startActivity(intent);
             }
         });
-
         return holder;
-
     }
 
     // binds the data to the TextView in each row

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dataPerApp"
     android:layout_width="400sp"
-    android:layout_height="80sp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:theme="@style/AppTheme.AppBarOverlay"
     app:layout_constraintEnd_toEndOf="parent"
@@ -25,32 +25,45 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/appName"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/blank"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
+        android:layout_marginStart="7dp"
         android:layout_marginTop="12dp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="17sp"
         app:layout_constraintStart_toEndOf="@+id/icon"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/lorem" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/appTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="13dp"
-        android:text=""
-        android:textColor="@color/grey"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/appName"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/lorem" />
+        <LinearLayout
+            android:id="@+id/appName_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="100dp">
+
+            <TextView
+                android:id="@+id/appName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="5dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                tools:text="@tools:sample/lorem" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/appTime"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-80dp"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@id/appName_container"
+            android:text=""
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            tools:text="@tools:sample/lorem" />
+    </RelativeLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/appTimeChart"
@@ -60,6 +73,6 @@
         android:layout_marginLeft="9dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/icon"
-        app:layout_constraintTop_toBottomOf="@+id/appName" />
+        app:layout_constraintTop_toBottomOf="@+id/blank" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,10 +2,9 @@ package com.example.timed;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -44,6 +43,12 @@ public class PerAppView extends AppCompatActivity {
         // app timer
         TextView timer = (TextView) findViewById(R.id.timer);
         timer.setText("2h");
+    }
+
+    public void onItemPresss(View view) {
+        Intent intent = new Intent(this, NotificationActivity.class);
+//        intent.putExtra("APP_NAME", mData.get(position));
+        startActivity(intent);
     }
 
     @Override
