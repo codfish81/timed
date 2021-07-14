@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -49,11 +50,6 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        // total time
-//        TextView totalTime = (TextView) findViewById(R.id.totalTime);
-//        totalTime.setText("2 hr, 12 min");
-
-
         /*// data to populate the RecyclerView with
         ArrayList<String> appName = new ArrayList<>();
         appName.add("Spotify");
@@ -88,6 +84,11 @@ public class Dashboard extends AppCompatActivity {
         AppDataManager usageMgr = new AppDataManager(this);
         List<AppDataManager.AppUsage> usageList = usageMgr.getUsage(AppDataManager.DAY_MS);
 
+        // total time
+//        int total = usageMgr.getTotalUsage(AppDataManager.DAY_MS);
+//        TextView totalTime = (TextView) findViewById(R.id.total_usage);
+//        totalTime.setText(total);
+
         ArrayList<String> appName = new ArrayList<>();
         ArrayList<String> appTime = new ArrayList<>();
 //        ArrayList<ClipData.Item> appIcon = new ArrayList<>();
@@ -115,6 +116,7 @@ public class Dashboard extends AppCompatActivity {
         adapter = new RecyclerViewAdapter(this, appName, appTime);
         //adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+
 
     }
 
