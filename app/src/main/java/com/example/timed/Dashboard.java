@@ -2,10 +2,14 @@ package com.example.timed;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -86,13 +90,24 @@ public class Dashboard extends AppCompatActivity {
 
         ArrayList<String> appName = new ArrayList<>();
         ArrayList<String> appTime = new ArrayList<>();
+//        ArrayList<ClipData.Item> appIcon = new ArrayList<>();
 
         for(AppDataManager.AppUsage usage : usageList)
         {
             appName.add(usage.name);
             appTime.add(DateUtils.formatElapsedTime(usage.usageMs / 1000));
-        }
 
+            /*try
+            {
+                ImageView imageView = (ImageView) findViewById(R.id.imageView);
+                Drawable icon = Dashboard.this.getPackageManager().getApplicationIcon(usage.name);
+                imageView.setImageDrawable(icon);
+            }
+            catch (PackageManager.NameNotFoundException e)
+            {
+                e.printStackTrace();
+            }*/
+        }
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvToday);
@@ -103,10 +118,11 @@ public class Dashboard extends AppCompatActivity {
 
     }
 
-    public void onItemClick(View view, int position) {
+    public void onItemClick(final View view, int position) {
+        // setContentView(R.layout.recyclerview_row);
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplication(), PerAppView.class);
-        startActivity(intent);
+        Intent intent = new Intent(view.getContext(), PerAppView.class);
+        view.getContext().startActivity(intent);
     }
 
 

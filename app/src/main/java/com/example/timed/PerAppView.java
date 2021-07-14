@@ -1,5 +1,6 @@
 package com.example.timed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,11 @@ public class PerAppView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
 
+        Intent intent = getIntent();
+        String APPNAME = intent.getStringExtra("APP_NAME");
+        String APPTIME = intent.getStringExtra("APP_TIME");
+
+
         // set a toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -28,12 +34,12 @@ public class PerAppView extends AppCompatActivity {
         totalTime.setText("Tue, Jun 8");
 
         // app name
-        TextView appName = (TextView) findViewById(R.id.appName);
-        appName.setText("Spotify");
+        TextView name = (TextView) findViewById(R.id.appName);
+        name.setText(APPNAME);
 
         // app usage
         TextView appTime = (TextView) findViewById(R.id.appTime);
-        appTime.setText("1 hr, 21 min / 2 hr");
+        appTime.setText(APPTIME);
 
         // app timer
         TextView timer = (TextView) findViewById(R.id.timer);

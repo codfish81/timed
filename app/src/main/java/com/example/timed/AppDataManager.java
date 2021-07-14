@@ -10,12 +10,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AppDataManager {
+public class AppDataManager extends AppCompatActivity {
     public static long DAY_MS = 1000 * 60 * 60 * 24;
     public static long WEEK_MS = DAY_MS * 7;
 

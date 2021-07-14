@@ -82,59 +82,63 @@
                 app:layout_constraintTop_toBottomOf="@+id/appTime" />
 
 
-            <View
-                android:id="@+id/verSeparator"
-                android:layout_width="0.5dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="428dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintEnd_toStartOf="@+id/timer"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iconTimer"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
-                android:layout_marginStart="28dp"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="33dp"
-                android:contentDescription="Timer Icon"
-                android:theme="@style/AppTheme.AppBarOverlay"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weekAppChart"
-                app:srcCompat="@drawable/outline_timer_24"
-                tools:layout_editor_absoluteX="28dp"
-                app:tint="@color/purple_500" />
-
-            <TextView
-                android:id="@+id/appLimitTitle"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginLeft="22dp"
-                android:layout_marginTop="38dp"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/iconTimer"
-                app:layout_constraintTop_toBottomOf="@+id/weekAppChart"
-                tools:text="App Limit" />
-
-            <TextView
-                android:id="@+id/timer"
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="38dp"
-                android:layout_marginEnd="26dp"
-                android:layout_marginRight="26dp"
-                android:text=""
-                android:textColor="@color/purple_700"
-                android:textSize="12sp"
+                android:layout_marginTop="11dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weekAppChart"
-                tools:text="@tools:sample/lorem" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weekAppChart">
+
+                <ImageView
+                    android:id="@+id/iconTimer"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:layout_marginStart="15dp"
+                    android:contentDescription="Timer Icon"
+                    android:theme="@style/AppTheme.AppBarOverlay"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/outline_timer_24"
+                    app:tint="@color/purple_500" />
+
+                <View
+                    android:id="@+id/verSeparator"
+                    android:layout_width="0.5dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintEnd_toStartOf="@+id/timer"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/appLimitTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="App Limit"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iconTimer"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/timer"
+                    android:layout_width="35dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="26dp"
+                    android:text=""
+                    android:textColor="@color/purple_700"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@tools:sample/lorem" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/weekAppChart"

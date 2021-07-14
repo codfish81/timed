@@ -1,3 +1,4 @@
+/*
 package com.example.timed;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +34,7 @@ import timber.log.Timber;
 
 public class AppTimeLog {
 
-    private static final String TIME_KEY = "time";
+    private static final String TIME_KEYE_KEY = "time";
     private static final String TARGET_PACKAGE_KEY = "target_package";
     private SharedPreferences preferences;
     private static final String DISPLAY_1_MIN = "display_1_min";
@@ -287,3 +288,4 @@ public class AppTimeLog {
     }
 }
 
+*/

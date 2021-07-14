@@ -3,11 +3,15 @@ package com.example.timed;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,14 +38,33 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_row, parent, false);
-        return new ViewHolder(view);
+        // return new ViewHolder(view);
+
+        final ViewHolder holder = new ViewHolder(view);
+
+        // クリックリスナを搭載
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int position = holder.getAdapterPosition(); // positionを取得
+                // 何かの処理をします
+//                Toast.makeText(this, "You clicked " + mData.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(), PerAppView.class);
+                intent.putExtra("APP_NAME", mData.get(position));
+                intent.putExtra("APP_TIME", timeData.get(position));
+                view.getContext().startActivity(intent);
+            }
+        });
+
+        return holder;
+
     }
 
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String appName = mData.get(position);
-        //holder.iconApp.setImageResource();
+//        holder.appIcon.setImageResource(position);
         holder.name.setText(appName);
 
         String appTime = timeData.get(position);
@@ -57,17 +80,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView iconApp;
-        TextView name;
-        TextView appTime;
-        LineChart appTimeChart;
-        View verSeparator;
-        ImageView iconTimer;
-        TextView appTimer;
+        public ImageView appIcon;
+        public TextView name;
+        public TextView appTime;
+        public LineChart appTimeChart;
+        public View verSeparator;
+        public ImageView iconTimer;
+        public TextView appTimer;
 
         ViewHolder(View itemView) {
             super(itemView);
-            iconApp = itemView.findViewById(R.id.icon);
+            appIcon = itemView.findViewById(R.id.icon);
             name = itemView.findViewById(R.id.appName);
             appTime = itemView.findViewById(R.id.appTime);
             appTimeChart = itemView.findViewById(R.id.appTimeChart);
