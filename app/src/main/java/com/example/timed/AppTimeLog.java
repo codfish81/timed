@@ -1,6 +1,6 @@
 package com.example.timed;
 
-import androidx.appcombat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.TargetApi;
 import android.app.AppOpsManager;
 import android.app.Notification;
@@ -38,7 +38,7 @@ public class AppTimeLog {
     private SharedPreferences preferences;
     private static final String DISPLAY_1_MIN = "display_1_min";
 
-    private int appTimed.;
+    private int appTimed;
     private boolean hasUsageAccess;
     private String mAppName;
     private Bitmap mAppIcon;
