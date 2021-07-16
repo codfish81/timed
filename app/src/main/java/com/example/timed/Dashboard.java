@@ -50,41 +50,11 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        /*// data to populate the RecyclerView with
-        ArrayList<String> appName = new ArrayList<>();
-        appName.add("Spotify");
-        appName.add("Chrome");
-        appName.add("Twitter");
-        appName.add("Instagram");
-        appName.add("Tiktok");
-        appName.add("Facebook");
-        appName.add("Kindle");
-        appName.add("Pinterest");
-
-        ArrayList<String> appTime = new ArrayList<>();
-        appTime.add("1 hr,　21 min");
-        appTime.add("38 min");
-        appTime.add("20 min");
-        appTime.add("18 min");
-        appTime.add("15 min");
-        appTime.add("12 min");
-        appTime.add("10 min");
-        appTime.add("8 min");
-
-        ArrayList<String> timeLimit = new ArrayList<>();
-        appTime.add("2 hr");
-        appTime.add("2 hr");
-        appTime.add("1 hr");
-        appTime.add("30 min");
-        appTime.add("30 min");
-        appTime.add("30 min");
-        appTime.add("30 min");
-        appTime.add("30 min");*/
-
         AppDataManager usageMgr = new AppDataManager(this);
-        List<AppDataManager.AppUsage> usageList = usageMgr.getUsage(AppDataManager.DAY_MS);
+        List<AppDataManager.AppUsage> usageList = usageMgr.getUsageForToDay();
 
         // total time
+
 //        int total = usageMgr.getTotalUsage(AppDataManager.DAY_MS);
 //        TextView totalTime = (TextView) findViewById(R.id.total_usage);
 //        totalTime.setText(total);
@@ -92,12 +62,13 @@ public class Dashboard extends AppCompatActivity {
         ArrayList<String> appName = new ArrayList<>();
         ArrayList<String> appTime = new ArrayList<>();
 //        ArrayList<ClipData.Item> appIcon = new ArrayList<>();
+        long totalTimeMs = 0;
 
         for(AppDataManager.AppUsage usage : usageList)
         {
             appName.add(usage.name);
             appTime.add(DateUtils.formatElapsedTime(usage.usageMs / 1000));
-
+            totalTimeMs = totalTimeMs + usage.usageMs;
             /*try
             {
                 ImageView imageView = (ImageView) findViewById(R.id.imageView);
@@ -109,7 +80,8 @@ public class Dashboard extends AppCompatActivity {
                 e.printStackTrace();
             }*/
         }
-
+        TextView totalTime = (TextView) findViewById(R.id.total_usage);
+        totalTime.setText("Total Up Time : " + DateUtils.formatElapsedTime(totalTimeMs / 1000));
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvToday);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

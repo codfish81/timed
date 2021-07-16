@@ -2,6 +2,7 @@ package com.example.timed;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WeekView extends AppCompatActivity {
 
@@ -49,35 +51,18 @@ public class WeekView extends AppCompatActivity {
 
 
         // data to populate the RecyclerView with
+
+        AppDataManager usageMgr = new AppDataManager(this);
+        List<AppDataManager.AppUsage> usageList = usageMgr.getUsageForWeek();
         ArrayList<String> appName = new ArrayList<>();
-        appName.add("Spotify");
-        appName.add("Chrome");
-        appName.add("Twitter");
-        appName.add("Instagram");
-        appName.add("Tiktok");
-        appName.add("Facebook");
-        appName.add("Kindle");
-        appName.add("Pinterest");
-
         ArrayList<String> appTime = new ArrayList<>();
-        appTime.add("1 hr,　21 min");
-        appTime.add("38 min");
-        appTime.add("20 min");
-        appTime.add("18 min");
-        appTime.add("15 min");
-        appTime.add("12 min");
-        appTime.add("10 min");
-        appTime.add("8 min");
+//        ArrayList<ClipData.Item> appIcon = new ArrayList<>();
 
-        ArrayList<String> timeLimit = new ArrayList<>();
-        appTime.add("2 hr");
-        appTime.add("2 hr");
-        appTime.add("1 hr");
-        appTime.add("30 min");
-        appTime.add("30 min");
-        appTime.add("30 min");
-        appTime.add("30 min");
-        appTime.add("30 min");
+        for(AppDataManager.AppUsage usage : usageList)
+        {
+            appName.add(usage.name);
+            appTime.add(DateUtils.formatElapsedTime(usage.usageMs / 1000));
+        }
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvWeek);
