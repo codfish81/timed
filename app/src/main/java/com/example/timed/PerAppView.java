@@ -1,12 +1,18 @@
 package com.example.timed;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PerAppView extends AppCompatActivity {
 
@@ -18,7 +24,7 @@ public class PerAppView extends AppCompatActivity {
         Intent intent = getIntent();
         String APPNAME = intent.getStringExtra("APP_NAME");
         String APPTIME = intent.getStringExtra("APP_TIME");
-
+        // Drawable APPICON = getResources().getDrawable(intent.getIntExtra("APP_ICON",-1));
 
         // set a toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -35,6 +41,10 @@ public class PerAppView extends AppCompatActivity {
         // app name
         TextView name = (TextView) findViewById(R.id.appName);
         name.setText(APPNAME);
+
+        // app icon
+//        ImageView icon = (ImageView) findViewById(R.id.icon);
+//        icon.setImageDrawable(APPICON);
 
         // app usage
         TextView appTime = (TextView) findViewById(R.id.appTime);

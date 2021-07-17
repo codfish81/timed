@@ -64,8 +64,6 @@ public class AppDataManager extends AppCompatActivity {
         @SuppressLint("QueryPermissionsNeeded")
         List<ResolveInfo> pkgAppsList = mPackageManager.queryIntentActivities(mainIntent, 0);
 
-        List<ApplicationInfo> packages = mPackageManager.getInstalledApplications(PackageManager.GET_META_DATA);
-
         for(UsageStats stat : stats){
             AppUsage usage = new AppUsage();
             usage.name = null;
@@ -75,14 +73,7 @@ public class AppDataManager extends AppCompatActivity {
             for (ResolveInfo app : pkgAppsList) {
                 if (app.activityInfo.packageName.equals(stat.getPackageName())) {
                     usage.name = app.activityInfo.loadLabel(mPackageManager).toString();
-                }
-            }
-
-            // get app icon
-            for (ApplicationInfo applicationInfo : packages) {
-                if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-                    //usage.name = applicationInfo.loadLabel(mPackageManager).toString();
-                    usage.icon = applicationInfo.loadIcon(mPackageManager);
+                    usage.icon = app.activityInfo.loadIcon(mPackageManager);
                 }
             }
 

@@ -53,16 +53,10 @@ public class Dashboard extends AppCompatActivity {
         AppDataManager usageMgr = new AppDataManager(this);
         List<AppDataManager.AppUsage> usageList = usageMgr.getUsageForToDay();
 
-        // total time
-
-//        int total = usageMgr.getTotalUsage(AppDataManager.DAY_MS);
-//        TextView totalTime = (TextView) findViewById(R.id.total_usage);
-//        totalTime.setText(total);
-
         ArrayList<String> appName = new ArrayList<>();
         ArrayList<String> appTime = new ArrayList<>();
         ArrayList<Drawable> appIcon = new ArrayList<>();
-//        ArrayList<ClipData.Item> appIcon = new ArrayList<>();
+
         long totalTimeMs = 0;
 
         for(AppDataManager.AppUsage usage : usageList)
