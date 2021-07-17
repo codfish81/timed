@@ -1,6 +1,6 @@
-
 package com.example.timed;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AppOpsManager;
 import android.app.usage.UsageStats;
@@ -10,15 +10,13 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.provider.Settings;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 public class AppDataManager {
-    public static long DAY_MS = 1000 * 60 * 60 * 24;
-    public static long WEEK_MS = DAY_MS * 7;
 
     private final UsageStatsManager mUsageStatsManager;
     private final PackageManager mPackageManager;
@@ -34,57 +32,29 @@ public class AppDataManager {
         mPackageManager = activity.getApplicationContext().getPackageManager();
     }
 
-
-    /**
-     * The getUsage function is used to request UsageStats history.
-     * @param usageLengthMs the amount of time in miliseconds to get data
-     * @return a lisy of AppUsage items
-     */
-    public List<AppUsage> getUsage(long usageLengthMs){
-        long endMs = System.currentTimeMillis();
-        long beginMs = endMs - usageLengthMs;
-
-        return getUsage(beginMs, endMs);
-    }
-
     public List<AppUsage> getUsageForToDay()
     {
-        long endMs = System.currentTimeMillis();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE,0);
-        calendar.set(Calendar.SECOND,0);
-        calendar.set(Calendar.MILLISECOND,0);
-        long beginMs = calendar.getTimeInMillis();
-
-        return getUsage(beginMs, endMs);
+        return getUsage(UsageStatsManager.INTERVAL_DAILY);
     }
     public List<AppUsage> getUsageForWeek()
     {
-        long endMs = System.currentTimeMillis();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE,0);
-        calendar.set(Calendar.SECOND,0);
-        calendar.set(Calendar.MILLISECOND,0);
-        long beginMs = calendar.getTimeInMillis() - 6 * DAY_MS;
-        return getUsage(beginMs, endMs);
+        return getUsage(UsageStatsManager.INTERVAL_WEEKLY);
     }
 
-    public List<AppUsage> getUsage(long beginMs, long endMs){
-
+    private List<AppUsage> getUsage(int interval){
 
         HashMap<String, AppUsage> resultMap = new HashMap<>();
 
-        // get all stats
-        final List<UsageStats> stats =
-                mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST, beginMs, endMs);
+        long now = System.currentTimeMillis();
+        // queryUsageStats returns incorrect data if begin and ent time are used,
+        // use the interval variable instead
+        // its a hack but you hav to set some kind of rand within the interval
+        final List<UsageStats> stats = mUsageStatsManager.queryUsageStats(interval, now - 10000, now);
 
         // get app list to resolve app name
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        @SuppressLint("QueryPermissionsNeeded")
         List<ResolveInfo> pkgAppsList = mPackageManager.queryIntentActivities(mainIntent, 0);
 
         for(UsageStats stat : stats){
@@ -101,12 +71,12 @@ public class AppDataManager {
 
             // only add stats that have usage times greater then 0
             if(usage.usageMs > 1000 && usage.name != null){
-                 AppUsage usageExisting = resultMap.get(usage.name);
-                 if (usageExisting != null){
-                     usageExisting.usageMs = usageExisting.usageMs + usage.usageMs;
-                 } else {
-                     resultMap.put(usage.name, usage);
-                 }
+                AppUsage usageExisting = resultMap.get(usage.name);
+                if (usageExisting != null){
+                    usageExisting.usageMs = usageExisting.usageMs + usage.usageMs;
+                } else {
+                    resultMap.put(usage.name, usage);
+                }
             }
         }
         List<AppUsage> result = new ArrayList<>(resultMap.values());

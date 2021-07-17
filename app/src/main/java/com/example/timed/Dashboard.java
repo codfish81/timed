@@ -81,7 +81,7 @@ public class Dashboard extends AppCompatActivity {
             }*/
         }
         TextView totalTime = (TextView) findViewById(R.id.total_usage);
-        totalTime.setText("Total Up Time : " + DateUtils.formatElapsedTime(totalTimeMs / 1000));
+        totalTime.setText("Total Up Time: " + DateUtils.formatElapsedTime(totalTimeMs / 1000));
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvToday);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
