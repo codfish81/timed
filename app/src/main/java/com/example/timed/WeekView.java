@@ -1,6 +1,7 @@
 package com.example.timed;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,18 +56,21 @@ public class WeekView extends AppCompatActivity {
         List<AppDataManager.AppUsage> usageList = usageMgr.getUsageForWeek();
         ArrayList<String> appName = new ArrayList<>();
         ArrayList<String> appTime = new ArrayList<>();
+        ArrayList<Drawable> appIcon = new ArrayList<>();
+
 //        ArrayList<ClipData.Item> appIcon = new ArrayList<>();
 
         for(AppDataManager.AppUsage usage : usageList)
         {
             appName.add(usage.name);
             appTime.add(DateUtils.formatElapsedTime(usage.usageMs / 1000));
+            appIcon.add(usage.icon);
         }
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvWeek);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecyclerViewAdapter(this, appName, appTime);
+        adapter = new RecyclerViewAdapter(this, appName, appTime, appIcon);
         //adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 

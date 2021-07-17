@@ -3,21 +3,18 @@ package com.example.timed;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.LineChart;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -26,12 +23,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     private List<String> timeData;
+    private List<Drawable> appIconImage;
 
     // data is passed into the constructor
-    RecyclerViewAdapter(Context context, List<String> data, List<String> appTimeData) {
+    RecyclerViewAdapter(Context context, List<String> data, List<String> appTimeData, ArrayList<Drawable> appIcon) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.timeData = appTimeData;
+        this.appIconImage = appIcon;
     }
 
     // inflates the row layout from xml when needed
@@ -58,11 +57,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String appName = mData.get(position);
-//        holder.appIcon.setImageResource(position);
         holder.name.setText(appName);
 
         String appTime = timeData.get(position);
         holder.appTime.setText(appTime);
+
+        Drawable appIcon = appIconImage.get(position);
+        holder.appIcon.setImageDrawable(appIcon);
     }
 
     // total number of rows

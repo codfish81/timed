@@ -7,16 +7,22 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.provider.Settings;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class AppDataManager {
+public class AppDataManager extends AppCompatActivity {
     public static long DAY_MS = 1000 * 60 * 60 * 24;
     public static long WEEK_MS = DAY_MS * 7;
 
@@ -75,7 +81,6 @@ public class AppDataManager {
 
     public List<AppUsage> getUsage(long beginMs, long endMs){
 
-
         HashMap<String, AppUsage> resultMap = new HashMap<>();
 
         // get all stats
@@ -87,6 +92,8 @@ public class AppDataManager {
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> pkgAppsList = mPackageManager.queryIntentActivities(mainIntent, 0);
 
+        List<ApplicationInfo> packages = mPackageManager.getInstalledApplications(PackageManager.GET_META_DATA);
+
         for(UsageStats stat : stats){
             AppUsage usage = new AppUsage();
             usage.name = null;
@@ -96,6 +103,14 @@ public class AppDataManager {
             for (ResolveInfo app : pkgAppsList) {
                 if (app.activityInfo.packageName.equals(stat.getPackageName())) {
                     usage.name = app.activityInfo.loadLabel(mPackageManager).toString();
+                }
+            }
+
+            // get app icon
+            for (ApplicationInfo applicationInfo : packages) {
+                if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                    //usage.name = applicationInfo.loadLabel(mPackageManager).toString();
+                    usage.icon = applicationInfo.loadIcon(mPackageManager);
                 }
             }
 
@@ -132,7 +147,7 @@ public class AppDataManager {
         boolean granted = mode == AppOpsManager.MODE_ALLOWED;
 
         // request user to set permissions if not granted
-        if (! granted) {
+        if (!granted) {
             activity.startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
         }
     }
@@ -143,6 +158,7 @@ public class AppDataManager {
     public static class AppUsage implements Comparable<AppUsage> {
         String name;
         long usageMs;
+        Drawable icon;
 
         @Override
         public int compareTo(AppUsage o) {

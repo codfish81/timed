@@ -53,14 +53,9 @@ public class Dashboard extends AppCompatActivity {
         AppDataManager usageMgr = new AppDataManager(this);
         List<AppDataManager.AppUsage> usageList = usageMgr.getUsageForToDay();
 
-        // total time
-
-//        int total = usageMgr.getTotalUsage(AppDataManager.DAY_MS);
-//        TextView totalTime = (TextView) findViewById(R.id.total_usage);
-//        totalTime.setText(total);
-
         ArrayList<String> appName = new ArrayList<>();
         ArrayList<String> appTime = new ArrayList<>();
+        ArrayList<Drawable> appIcon = new ArrayList<>();
 //        ArrayList<ClipData.Item> appIcon = new ArrayList<>();
         long totalTimeMs = 0;
 
@@ -69,23 +64,17 @@ public class Dashboard extends AppCompatActivity {
             appName.add(usage.name);
             appTime.add(DateUtils.formatElapsedTime(usage.usageMs / 1000));
             totalTimeMs = totalTimeMs + usage.usageMs;
-            /*try
-            {
-                ImageView imageView = (ImageView) findViewById(R.id.imageView);
-                Drawable icon = Dashboard.this.getPackageManager().getApplicationIcon(usage.name);
-                imageView.setImageDrawable(icon);
-            }
-            catch (PackageManager.NameNotFoundException e)
-            {
-                e.printStackTrace();
-            }*/
+            appIcon.add(usage.icon);
         }
+
+        //total up time
         TextView totalTime = (TextView) findViewById(R.id.total_usage);
         totalTime.setText("Total Up Time : " + DateUtils.formatElapsedTime(totalTimeMs / 1000));
+
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvToday);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecyclerViewAdapter(this, appName, appTime);
+        adapter = new RecyclerViewAdapter(this, appName, appTime, appIcon);
         //adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
 
