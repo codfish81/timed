@@ -1,6 +1,7 @@
 
 package com.example.timed;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AppOpsManager;
 import android.app.usage.UsageStats;
@@ -55,41 +56,27 @@ public class AppDataManager extends AppCompatActivity {
 
     public List<AppUsage> getUsageForToDay()
     {
-        long endMs = System.currentTimeMillis();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE,0);
-        calendar.set(Calendar.SECOND,0);
-        calendar.set(Calendar.MILLISECOND,0);
-        long beginMs = calendar.getTimeInMillis();
-
-        return getUsage(beginMs, endMs);
+        return getUsage(UsageStatsManager.INTERVAL_DAILY);
     }
     public List<AppUsage> getUsageForWeek()
     {
-        long endMs = System.currentTimeMillis();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY,0);
-        calendar.set(Calendar.MINUTE,0);
-        calendar.set(Calendar.SECOND,0);
-        calendar.set(Calendar.MILLISECOND,0);
-        long beginMs = calendar.getTimeInMillis() - 6 * DAY_MS;
-        return getUsage(beginMs, endMs);
+        return getUsage(UsageStatsManager.INTERVAL_WEEKLY);
     }
 
-    public List<AppUsage> getUsage(long beginMs, long endMs){
+    private List<AppUsage> getUsage(int interval){
 
         HashMap<String, AppUsage> resultMap = new HashMap<>();
 
-        // get all stats
-        final List<UsageStats> stats =
-                mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST, beginMs, endMs);
+        long now = System.currentTimeMillis();
+        // queryUsageStats returns incorrect data if begin and ent time are used,
+        // use the interval variable instead
+        // its a hack but you hav to set some kind of rand within the interval
+        final List<UsageStats> stats = mUsageStatsManager.queryUsageStats(interval, now - 10000, now);
 
         // get app list to resolve app name
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        @SuppressLint("QueryPermissionsNeeded")
         List<ResolveInfo> pkgAppsList = mPackageManager.queryIntentActivities(mainIntent, 0);
 
         List<ApplicationInfo> packages = mPackageManager.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -147,7 +134,7 @@ public class AppDataManager extends AppCompatActivity {
         boolean granted = mode == AppOpsManager.MODE_ALLOWED;
 
         // request user to set permissions if not granted
-        if (!granted) {
+        if (! granted) {
             activity.startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
         }
     }

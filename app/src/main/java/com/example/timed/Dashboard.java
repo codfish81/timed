@@ -53,6 +53,12 @@ public class Dashboard extends AppCompatActivity {
         AppDataManager usageMgr = new AppDataManager(this);
         List<AppDataManager.AppUsage> usageList = usageMgr.getUsageForToDay();
 
+        // total time
+
+//        int total = usageMgr.getTotalUsage(AppDataManager.DAY_MS);
+//        TextView totalTime = (TextView) findViewById(R.id.total_usage);
+//        totalTime.setText(total);
+
         ArrayList<String> appName = new ArrayList<>();
         ArrayList<String> appTime = new ArrayList<>();
         ArrayList<Drawable> appIcon = new ArrayList<>();
@@ -69,8 +75,7 @@ public class Dashboard extends AppCompatActivity {
 
         //total up time
         TextView totalTime = (TextView) findViewById(R.id.total_usage);
-        totalTime.setText("Total Up Time : " + DateUtils.formatElapsedTime(totalTimeMs / 1000));
-
+        totalTime.setText("Total Up Time: " + DateUtils.formatElapsedTime(totalTimeMs / 1000));
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvToday);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
