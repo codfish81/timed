@@ -24,8 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AppDataManager extends AppCompatActivity {
-    public static long DAY_MS = 1000 * 60 * 60 * 24;
-    public static long WEEK_MS = DAY_MS * 7;
 
     private final UsageStatsManager mUsageStatsManager;
     private final PackageManager mPackageManager;
@@ -39,19 +37,6 @@ public class AppDataManager extends AppCompatActivity {
         checkPermissions(activity);
 
         mPackageManager = activity.getApplicationContext().getPackageManager();
-    }
-
-
-    /**
-     * The getUsage function is used to request UsageStats history.
-     * @param usageLengthMs the amount of time in miliseconds to get data
-     * @return a lisy of AppUsage items
-     */
-    public List<AppUsage> getUsage(long usageLengthMs){
-        long endMs = System.currentTimeMillis();
-        long beginMs = endMs - usageLengthMs;
-
-        return getUsage(beginMs, endMs);
     }
 
     public List<AppUsage> getUsageForToDay()
