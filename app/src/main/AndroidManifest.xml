@@ -31,10 +31,6 @@
 
         <activity android:name=".AppDataManager"/>
 
-        <activity android:name=".DataDisplay" />
-
-        <activity android:name=".LimitInput"/>
-
         <activity android:name=".PerAppView" />
 
         <activity android:name=".WeekView"

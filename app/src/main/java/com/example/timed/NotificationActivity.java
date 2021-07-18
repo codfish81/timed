@@ -41,7 +41,12 @@ public class NotificationActivity extends AppCompatActivity {
         findViewById(R.id.b_submit).setOnClickListener((view) -> handleSubmit());
     }
 
-    private void handleSubmit() {
+    /*public Object timeLimit() {
+        int time = Integer.parseInt(etTime.getText().toString());
+        return time;
+    }*/
+
+    void handleSubmit() {
         SharedPreferences sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String message = etMessage.getText().toString();

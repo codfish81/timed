@@ -1,6 +1,8 @@
 package com.example.timed;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -51,8 +53,7 @@ public class PerAppView extends AppCompatActivity {
         appTime.setText(APPTIME);
 
         // app timer
-        TextView timer = (TextView) findViewById(R.id.timer);
-        timer.setText("2h");
+
     }
 
     public void onItemPresss(View view) {
