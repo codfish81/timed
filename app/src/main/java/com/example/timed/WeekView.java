@@ -20,6 +20,11 @@ import java.util.List;
 
 public class WeekView extends AppCompatActivity {
 
+    /*
+     * Weekly View
+     * sets the app list (recycler view) for the past few weeks and charts
+     */
+
     RecyclerViewAdapter adapter;
 
     @Override
@@ -49,17 +54,16 @@ public class WeekView extends AppCompatActivity {
         TextView totalTime = (TextView) findViewById(R.id.date);
         totalTime.setText("Tue, Jun 8");
 
-
         // data to populate the RecyclerView with
 
+        // Gets data through AppDataManager
         AppDataManager usageMgr = new AppDataManager(this);
         List<AppDataManager.AppUsage> usageList = usageMgr.getUsageForWeek();
         ArrayList<String> appName = new ArrayList<>();
         ArrayList<String> appTime = new ArrayList<>();
         ArrayList<Drawable> appIcon = new ArrayList<>();
 
-//        ArrayList<ClipData.Item> appIcon = new ArrayList<>();
-
+        // adds data to the list
         for(AppDataManager.AppUsage usage : usageList)
         {
             appName.add(usage.name);
@@ -76,10 +80,7 @@ public class WeekView extends AppCompatActivity {
 
     }
 
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-    }
-
+    // set a back button in action bar
     @Override
     public boolean onSupportNavigateUp() {
         finish();

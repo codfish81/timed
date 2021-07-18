@@ -24,6 +24,11 @@ import java.util.List;
 
 public class Dashboard extends AppCompatActivity {
 
+    /*
+    * Dashboard
+    * sets the total up time & app list (recycler view) for today
+    */
+
     RecyclerViewAdapter adapter;
 
     @Override
@@ -49,16 +54,20 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-
+        // gettind data from AppDataManager
         AppDataManager usageMgr = new AppDataManager(this);
         List<AppDataManager.AppUsage> usageList = usageMgr.getUsageForToDay();
 
+        // app name list
         ArrayList<String> appName = new ArrayList<>();
+        // app usage list
         ArrayList<String> appTime = new ArrayList<>();
+        // app icon list
         ArrayList<Drawable> appIcon = new ArrayList<>();
 
         long totalTimeMs = 0;
 
+        // adding the data
         for(AppDataManager.AppUsage usage : usageList)
         {
             appName.add(usage.name);
@@ -67,9 +76,10 @@ public class Dashboard extends AppCompatActivity {
             appIcon.add(usage.icon);
         }
 
-        //total up time
+        // set total up time
         TextView totalTime = (TextView) findViewById(R.id.total_usage);
         totalTime.setText("Total Up Time: " + DateUtils.formatElapsedTime(totalTimeMs / 1000));
+
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvToday);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -85,14 +95,6 @@ public class Dashboard extends AppCompatActivity {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(view.getContext(), PerAppView.class);
         view.getContext().startActivity(intent);
-    }
-
-
-    public static void getAppData(String[] args) {
-    }
-
-    public static void showAppData(String[] args) {
-
     }
 
 }

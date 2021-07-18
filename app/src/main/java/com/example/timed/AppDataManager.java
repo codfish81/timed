@@ -69,7 +69,7 @@ public class AppDataManager extends AppCompatActivity {
             usage.name = null;
             usage.usageMs = stat.getTotalTimeInForeground();
 
-            // try to get app name
+            // try to get app name and icon
             for (ResolveInfo app : pkgAppsList) {
                 if (app.activityInfo.packageName.equals(stat.getPackageName())) {
                     usage.name = app.activityInfo.loadLabel(mPackageManager).toString();

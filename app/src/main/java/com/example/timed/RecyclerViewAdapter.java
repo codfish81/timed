@@ -20,6 +20,11 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
+    /*
+     * Adapter class for recycler view
+     * Makes the app list
+     */
+
     private List<String> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
